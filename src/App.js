@@ -5,12 +5,7 @@ import { Message, Icon } from 'semantic-ui-react';
 
 import Counter from './Counter';
 import {connect} from 'react-redux';
-
-@connect((store)=>{
-  return {
-    counter: store.counter
-  };
-})
+import { bindActionCreators } from 'redux';
 
 class App extends Component {
   render() {
@@ -38,4 +33,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = store =>
+  ({
+    counter: store.counter.counter
+  });
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+      
+    }, dispatch);
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

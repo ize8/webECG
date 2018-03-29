@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import {incCounter, decCounter} from './counterActions';
+import * as counter from './counterActions';
 
 class Counter extends Component {
 
@@ -29,4 +30,11 @@ const mapStateToProps = store =>
     counter: store.counter.counter
   });
 
-export default connect(mapStateToProps, {incCounter, decCounter})(Counter);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+      incCounter: counter.incCounter, 
+      decCounter: counter.decCounter,
+    }, dispatch);
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
