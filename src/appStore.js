@@ -2,10 +2,10 @@ import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
 import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import counterReducer from './Counter/counterReducer';
+import appReducer from './appReducer';
 
 const reducers = combineReducers({
-    counter: counterReducer,
+    app: appReducer,
 });
 
 const middleWare = applyMiddleware(thunk, createLogger());

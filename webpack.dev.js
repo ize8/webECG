@@ -19,15 +19,17 @@ module.exports = {
    plugins: [ new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|hun/)],
 	
    module: {
-      loaders: [
+      rules: [
          {
             test: /\.js?$/,
             exclude: /node_modules/,
-            loader: 'babel-loader',
-				
-            query: {
-               presets: ['env', 'react'],
-               plugins: ['transform-decorators-legacy','transform-class-properties',["import", [{ libraryName: "antd", style: "css" }]]]
+            use: {
+                loader: 'babel-loader',
+                
+                options: {
+                   presets: ['env', 'react'],
+                   plugins: ['transform-decorators-legacy','transform-class-properties',["import", [{ libraryName: "antd", style: "css" }]]]
+                }
             }
          },
          {
@@ -36,7 +38,7 @@ module.exports = {
          },
          { 
             test: /\.css$/, 
-            loader: "style-loader!css-loader" 
+            use: [ 'style-loader', 'css-loader' ] 
          }
       ]
    }
